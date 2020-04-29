@@ -5,17 +5,17 @@ from selenium.webdriver.common.by import By
 import time
 
 CONFIGS = {
-    'USERNAME': input("username:"),
-    'PASSWORD': input("password:"),
-    'HASHTAGS': [ 'love', 'cars'],
-    'TOTAL_LIKES_PER_HASHTAG':10,
+    'USERNAME':input("username:"),
+    'PASSWORD':input("password:"),
+    'HASHTAGS':input("hashtag"),
+    'TOTAL_LIKES_PER_HASHTAG':input("numberof likes:"),
 
 }
 
 total_likes = 0
 total_follows=0
 
-driver = webdriver.Chrome(r'C:\Users\HP\Desktop\chromedriver.exe')#enter the path of chromedriver
+driver = webdriver.Chrome(r'C:\Users\HP\Desktop\chromedriver.exe')
 driver.get("https://www.instagram.com/")
 WebDriverWait(driver, 10).until(EC.presence_of_element_located((   By.NAME, 'username')))
 usernameInput = driver.find_element(By.NAME, 'username')
@@ -47,7 +47,7 @@ for current_hashtag in CONFIGS['HASHTAGS']:
 
     current_hashtag_likes = 0
     current_follows=0
-   while current_hashtag_likes < CONFIGS['TOTAL_LIKES_PER_HASHTAG']:
+    while current_hashtag_likes < CONFIGS['TOTAL_LIKES_PER_HASHTAG']:
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.TAG_NAME, "time")))
         time.sleep(1)
         likeButton = driver.find_element(By.XPATH,
@@ -85,4 +85,3 @@ print("Exiting...")
 print("=====================")
 print("Total posts liked: {}".format(total_likes))
 print("Total follows:{}".format(total_follows))
-driver.quit()
